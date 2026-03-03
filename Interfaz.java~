@@ -1,0 +1,123 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+public class Interfaz {
+
+    public static void main(String[] args) {
+	Scanner input = new Scanner(System.in);
+	int respuesta = 2;
+	boolean datoValido = false;
+	Tablero tablero = new Tablero();
+	int opcion = 1;
+	
+	System.out.println("Bienvenido a Picross!!!\nIngresa el nombre del jugador:");
+	String jugador = input.nextLine();
+	while (!datoValido) {
+            try {
+		System.out.println("Te gustaria empezar a jugar? \n1) Si.\n2) No, salir.");
+		respuesta = input.nextInt();
+                if (respuesta == 1 || respuesta == 2) {
+                    datoValido = true;
+                } else {
+                    System.out.println("Por favor, elige 1 o 2.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Ingresa una opcion valida");
+                input.nextLine();
+            }
+        }
+	datoValido = false;
+	
+	if(respuesta == 1) {
+	    tablero.reiniciarTablero();
+	    tablero.imprimirTablero();
+	    while(!tablero.compararTablero()) {
+
+		while(!datoValido){
+		    try {
+			System.out.print("Fila: ");
+			respuesta = input.nextInt();
+			if ( respuesta >= 1 && respuesta <= 5 ) {
+			    datoValido = true;
+			} else {
+			    System.out.println("Por favor, elige un numero entre 1 y 5");
+			}
+		    } catch (InputMismatchException e) {
+			System.out.println("Ingresa una opcion valida");
+			input.nextLine();
+		    }
+		}
+		datoValido = false;
+		int x = respuesta;
+
+		while(!datoValido) {
+		    try {
+			System.out.print("Columna: ");
+			respuesta = input.nextInt();
+			if ( respuesta >= 1 && respuesta <= 5 ) {
+			    datoValido = true;
+			} else {
+			    System.out.println("Por favor, elige un numero entre 1 y 5");
+			}
+		    } catch (InputMismatchException e) {
+			System.out.println("Ingresa una opcion valida");
+			input.nextLine();
+		    }
+		}
+		datoValido = false;
+		int y = respuesta;
+
+		while(!datoValido) {
+		    try {
+			System.out.print("Ingresa el valor que quieres cambiar (1 o 0): ");
+			respuesta = input.nextInt();
+			if (respuesta == 1 || respuesta == 0) {
+			    datoValido = true;
+			} else {
+			    System.out.println("Por favor, elige 1 o 0");
+			}
+		    } catch (InputMismatchException e) {
+			System.out.println("Ingresa una opcion valida");
+			input.nextLine();
+		    }
+		}
+		datoValido = false;
+		int valor = respuesta;
+		
+		tablero.editarTablero(x,y,valor);
+		System.out.println("----------------------------");
+		tablero.imprimirTablero();
+
+		if(!tablero.compararTablero()){
+		    while(!datoValido) {
+		    try {
+			System.out.println(jugador + ", Quieres seguir jugando o te rindes?\n1) Sigo \n0) Me rindo");
+			respuesta = input.nextInt();
+			if (respuesta == 1 || respuesta == 0) {
+			    datoValido = true;
+			} else {
+			    System.out.println("Por favor, elige 1 o 0");
+			}
+		    } catch (InputMismatchException e) {
+			System.out.println("Ingresa una opcion valida");
+			input.nextLine();
+		    }
+		}
+		datoValido = false;
+		opcion = respuesta;
+		}
+		
+		if (opcion == 2) {
+		    break;
+		}
+	    }	
+	}else{
+	    System.out.println("Nos vemos, cuidate!");
+	}
+	
+	if(tablero.compararTablero()) {
+	    System.out.println("Haz ganado estoy re orgullo de ti, " +jugador + " !!!");
+	}else{
+	    System.out.println("Nos vemos, cuidate!!!");
+	}
+    }
+}
