@@ -2,6 +2,10 @@ Eduardo Sanchez de la Rosa
 426008938
 eduardosdlrosa@gmail.com
 
+EL METODO MAIN ESTA EN INTERFAZ, ENTONCES EL JAVAC HACERLO EN INTERFAZ POR FAVOR.
+
+BREVE DESCRIPCION
+
 El código se divide en dos clases principales que separan la lógica de la interacción con el usuario:
 
     Interfaz.java (El Controlador): Maneja la entrada de datos por teclado, el flujo de turnos y las validaciones (usando try-catch para evitar que el programa truene si escribes una letra en vez de un número).
